@@ -24,30 +24,49 @@ namespace Trivia
 
         public void AskQuestion(int place)
         {
+
+            var typequestion = GetCategorie(1);
+
+            if (typequestion == TypeQuestion.Pop)
+            {
+                Console.WriteLine(_popQuestions.First());
+                _popQuestions.RemoveFirst();
+            }
+            if (typequestion == TypeQuestion.Science)
+            {
+                Console.WriteLine(_scienceQuestions.First());
+                _scienceQuestions.RemoveFirst();
+            }
+            if (typequestion == TypeQuestion.Sports)
+            {
+                Console.WriteLine(_sportsQuestions.First());
+                _sportsQuestions.RemoveFirst();
+            }
+            if (typequestion == TypeQuestion.Rock)
+            {
+                Console.WriteLine(_rockQuestions.First());
+                _rockQuestions.RemoveFirst();
+            }
+        }
+
+        public TypeQuestion GetCategorie(int place)
+        {
             switch (place)
             {
                 case 0:
                 case 4:
                 case 8:
-                    Console.WriteLine(_popQuestions.First());
-                    _popQuestions.RemoveFirst();
-                    break;
+                    return TypeQuestion.Pop;
                 case 1:
                 case 5:
                 case 9:
-                    Console.WriteLine(_scienceQuestions.First());
-                    _scienceQuestions.RemoveFirst();
-                    break;
+                    return TypeQuestion.Science;
                 case 2:
                 case 6:
                 case 10:
-                    Console.WriteLine(_sportsQuestions.First());
-                    _sportsQuestions.RemoveFirst();
-                    break;
+                    return TypeQuestion.Sports;
                 default:
-                    Console.WriteLine(_rockQuestions.First());
-                    _rockQuestions.RemoveFirst();
-                    break;
+                    return TypeQuestion.Rock;
 
             }
         }

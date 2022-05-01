@@ -8,32 +8,16 @@ namespace Trivia
     {
         private readonly List<Players> _players = new List<Players>();
 
+        private readonly Questions _questions = new Questions();
 
 
-        private readonly LinkedList<string> _popQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> _scienceQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> _sportsQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> _rockQuestions = new LinkedList<string>();
 
         private int _currentPlayer;
-      
-
         private Players CurrentPlayer => _players[_currentPlayer];
 
         public Game()
         {
-            for (var i = 0; i < 50; i++)
-            {
-                _popQuestions.AddLast("Pop Question " + i);
-                _scienceQuestions.AddLast(("Science Question " + i));
-                _sportsQuestions.AddLast(("Sports Question " + i));
-                _rockQuestions.AddLast(CreateRockQuestion(i));
-            }
-        }
-
-        public string CreateRockQuestion(int index)
-        {
-            return "Rock Question " + index;
+           
         }
 
         public bool IsPlayable()
@@ -78,8 +62,8 @@ namespace Trivia
                     Console.WriteLine(CurrentPlayer
                                       + "'s new location is "
                                       + playerPlace);
-                    Console.WriteLine("The category is " + CurrentCategory());
-                    AskQuestion();
+                    Console.WriteLine("The category is " + _questions.GetCategorie(playerPlace));
+                    _questions.AskQuestion(playerPlace);
                 }
                 else
                 {
@@ -95,48 +79,12 @@ namespace Trivia
                 Console.WriteLine(_players[_currentPlayer]
                         + "'s new location is "
                         + playerPlace);
-                Console.WriteLine("The category is " + CurrentCategory());
-                AskQuestion();
+                Console.WriteLine("The category is " + _questions.GetCategorie(playerPlace));
+                _questions.AskQuestion(playerPlace);
             }
         }
 
-        private void AskQuestion()
-        {
-            if (CurrentCategory() == "Pop")
-            {
-                Console.WriteLine(_popQuestions.First());
-                _popQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Science")
-            {
-                Console.WriteLine(_scienceQuestions.First());
-                _scienceQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Sports")
-            {
-                Console.WriteLine(_sportsQuestions.First());
-                _sportsQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Rock")
-            {
-                Console.WriteLine(_rockQuestions.First());
-                _rockQuestions.RemoveFirst();
-            }
-        }
-
-        private string CurrentCategory()
-        {
-            if (CurrentPlayer.Place == 0) return "Pop";
-            if (CurrentPlayer.Place == 4) return "Pop";
-            if (CurrentPlayer.Place == 8) return "Pop";
-            if (CurrentPlayer.Place == 1) return "Science";
-            if (CurrentPlayer.Place == 5) return "Science";
-            if (CurrentPlayer.Place == 9) return "Science";
-            if (CurrentPlayer.Place == 2) return "Sports";
-            if (CurrentPlayer.Place == 6) return "Sports";
-            if (CurrentPlayer.Place == 10) return "Sports";
-            return "Rock";
-        }
+     
 
         public bool WasCorrectlyAnswered()
         {
