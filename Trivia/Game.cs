@@ -48,7 +48,7 @@ namespace Trivia
                 if (roll % 2 != 0)
                 {
 
-                   CurrentPlayer.IsGettingOutOfPenaltyBox=true;
+                   CurrentPlayer.InPenaltyBox = false;
                    Console.WriteLine(CurrentPlayer + " is getting out of the penalty box");
                     playerPlace = playerPlace + roll;
                     CurrentPlayer.PrintLocation();
@@ -57,11 +57,12 @@ namespace Trivia
                 else
                 {
                     Console.WriteLine(CurrentPlayer + " is not getting out of the penalty box");
-                    CurrentPlayer.IsGettingOutOfPenaltyBox = false;
+           
                 }
             }
             else
             {
+                playerPlace = playerPlace + roll;
                 CurrentPlayer.PrintLocation();
                 _questions.AskQuestion(playerPlace);
             }
@@ -73,27 +74,14 @@ namespace Trivia
         {
             if (CurrentPlayer.InPenaltyBox)
             {
-                if (CurrentPlayer.IsGettingOutOfPenaltyBox)
-                {
-
-                    HandleGoodAnswer();
-
-                    var winner = DidPlayerWin();
-                    HandleNextPlayer();
-
-                    return winner;
-                }
-                else
-                {
-                    HandleGoodAnswer();
-                    HandleNextPlayer();
-                    return true;
-                }
+                HandleNextPlayer();
+                return true;
+             
             }
             else
             {
-              
 
+                HandleGoodAnswer();
                 var winner = DidPlayerWin();
                 HandleNextPlayer();
 

@@ -10,7 +10,7 @@ namespace Trivia
             Place = 0;
             Purse = 0;
             InPenaltyBox = false;
-            IsGettingOutOfPenaltyBox=false;
+         
         }
 
         public string Name { get; set; }
@@ -34,7 +34,7 @@ namespace Trivia
 
         public bool InPenaltyBox { get; set; }
 
-        public bool IsGettingOutOfPenaltyBox { get; set; }
+
 
         public void PrintLocation()
         {
