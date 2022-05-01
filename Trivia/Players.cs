@@ -8,6 +8,7 @@
             Place = 0;
             Purse = 0;
             InPenaltyBox = false;
+            IsGettingOutOfPenaltyBox=false;
         }
 
         public string Name { get; set; }
@@ -17,6 +18,8 @@
         public int Purse { get; set; }
 
         public bool InPenaltyBox { get; set; }
+
+        public bool IsGettingOutOfPenaltyBox { get; set; }
         
     }
 }
