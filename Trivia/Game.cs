@@ -18,10 +18,7 @@ namespace Trivia
         private int _currentPlayer;
       
 
-        private Players CurrentPlayer
-        {
-            get => _players[_currentPlayer];
-        }
+        private Players CurrentPlayer => _players[_currentPlayer];
 
         public Game()
         {
@@ -41,7 +38,7 @@ namespace Trivia
 
         public bool IsPlayable()
         {
-            return (HowManyPlayers() >= 2);
+            return _players.Count >= 2;
         }
 
         public bool Add(string playerName)
@@ -56,10 +53,6 @@ namespace Trivia
             return true;
         }
 
-        public int HowManyPlayers()
-        {
-            return _players.Count;
-        }
 
         public void Roll(int roll)
         {
@@ -153,10 +146,10 @@ namespace Trivia
                 {
                     Console.WriteLine("Answer was correct!!!!");
                     CurrentPlayer.Purse++;
-                    Console.WriteLine(_players[_currentPlayer]
-                            + " now has "
-                            + CurrentPlayer.Purse
-                            + " Gold Coins.");
+                    Console.WriteLine(CurrentPlayer
+                                      + " now has "
+                                      + CurrentPlayer.Purse
+                                      + " Gold Coins.");
 
                     var winner = DidPlayerWin();
                     _currentPlayer++;
@@ -175,10 +168,10 @@ namespace Trivia
             {
                 Console.WriteLine("Answer was corrent!!!!");
                 CurrentPlayer.Purse++;
-                Console.WriteLine(_players[_currentPlayer]
-                        + " now has "
-                        + CurrentPlayer.Purse
-                        + " Gold Coins.");
+                Console.WriteLine(CurrentPlayer
+                                  + " now has "
+                                  + CurrentPlayer.Purse
+                                  + " Gold Coins.");
 
                 var winner = DidPlayerWin();
                 _currentPlayer++;
@@ -191,7 +184,7 @@ namespace Trivia
         public bool WrongAnswer()
         {
             Console.WriteLine("Question was incorrectly answered");
-            Console.WriteLine(_players[_currentPlayer] + " was sent to the penalty box");
+            Console.WriteLine(CurrentPlayer + " was sent to the penalty box");
             CurrentPlayer.InPenaltyBox = true;
 
             _currentPlayer++;
