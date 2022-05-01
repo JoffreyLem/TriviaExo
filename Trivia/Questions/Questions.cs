@@ -26,7 +26,7 @@ namespace Trivia
         {
 
             var typequestion = GetCategorie(1);
-
+            Console.WriteLine("The category is " + typequestion);
             if (typequestion == TypeQuestion.Pop)
             {
                 Console.WriteLine(_popQuestions.First());
