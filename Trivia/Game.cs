@@ -6,34 +6,36 @@ namespace Trivia
 {
     public class Game
     {
-        private readonly List<Players> _players = new List<Players>();
-
-        private readonly Questions _questions = new Questions();
-
+        public readonly List<Players> Players;
+        public readonly Questions Questions;
 
 
-        private int _currentPlayer;
-        private Players CurrentPlayer => _players[_currentPlayer];
+
+        public int CurrentPlayerIndex { get; set; }
+        private Players CurrentPlayer => Players[CurrentPlayerIndex];
 
         public Game()
         {
-           
+            Players = new List<Players>();
+            Questions = new Questions();
+            CurrentPlayerIndex = 0;
         }
 
-        public bool IsPlayable()
-        {
-            return _players.Count >= 2;
-        }
+     
 
         public bool Add(string playerName)
         {
             Players players = new Players(playerName);
-            _players.Add(players);
+            Players.Add(players);
             Console.WriteLine(playerName + " was added");
-            Console.WriteLine("They are player number " + _players.Count);
+            Console.WriteLine("They are player number " + Players.Count);
             return true;
         }
 
+        public bool IsPlayable()
+        {
+            return Players.Count >= 2;
+        }
 
         public void Roll(int roll)
         {
@@ -50,9 +52,9 @@ namespace Trivia
 
                    CurrentPlayer.InPenaltyBox = false;
                    Console.WriteLine(CurrentPlayer + " is getting out of the penalty box");
-                    playerPlace = playerPlace + roll;
+                   CurrentPlayer.Place = playerPlace + roll;
                     CurrentPlayer.PrintLocation();
-                    _questions.AskQuestion(playerPlace);
+                    Questions.AskQuestion(playerPlace);
                 }
                 else
                 {
@@ -62,9 +64,9 @@ namespace Trivia
             }
             else
             {
-                playerPlace = playerPlace + roll;
+                CurrentPlayer.Place = playerPlace + roll;
                 CurrentPlayer.PrintLocation();
-                _questions.AskQuestion(playerPlace);
+                Questions.AskQuestion(playerPlace);
             }
         }
 
@@ -100,8 +102,8 @@ namespace Trivia
 
         public void HandleNextPlayer()
         {
-            _currentPlayer++;
-            if (_currentPlayer == _players.Count) _currentPlayer = 0;
+            CurrentPlayerIndex++;
+            if (CurrentPlayerIndex == Players.Count) CurrentPlayerIndex = 0;
         }
 
         public void HandleGoodAnswer()
