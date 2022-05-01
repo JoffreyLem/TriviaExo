@@ -71,13 +71,13 @@ namespace Trivia
                
                 
 
-                    Console.WriteLine(_players[_currentPlayer] + " is getting out of the penalty box");
+                    Console.WriteLine(CurrentPlayer + " is getting out of the penalty box");
                     playerPlace = playerPlace + roll;
                     if (playerPlace > 11) playerPlace = playerPlace - 12;
 
-                    Console.WriteLine(_players[_currentPlayer]
-                            + "'s new location is "
-                            + playerPlace);
+                    Console.WriteLine(CurrentPlayer
+                                      + "'s new location is "
+                                      + playerPlace);
                     Console.WriteLine("The category is " + CurrentCategory());
                     AskQuestion();
                 }
